@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.css" />
+    <style>
+    	.controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+      #pac-input {
+        background-color: #fff;
+        padding: 0 11px 0 13px;
+        width: 400px;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+        margin-left: -1px;
+        padding-left: 14px;  /* Regular padding-left + 1. */
+        width: 401px;
+      }
+      .footer{
+        bottom:0px;
+        position:absolute;
+        width:100%;
+	  }
+    </style>
+    <title>ToMEet</title>
+</head>
+<body>
+	<!-- Main page page -->
+	<div data-role="page" id="main_page">
+			<div data-role="header"><h1>ToMEet</h1></div>
+			<div data-role="content">
+				<button id="btn_startMeet" data-inline="false">Start Meeting</button>
+				<button id="btn_updateInfo" data-inline="false">Update info</button>
+				<!--<button id="btn_register" data-inline="false">Register Now</button>-->
+			</div>
+	</div>
+	
+	<!-- user info page -->
+	<div data-role="page" id="user_info">
+			<div data-role="header">
+				<a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+				<h1>Profile</h1>
+			</div>
+			<div data-role="content">
+            <form id="check-user" class="ui-body ui-body-a ui-corner-all">
+                <fieldset>
+                    <div data-role="fieldcontain">
+                    	<input type="hidden"/>
+                        <label for="phonenumber">Phone Number:</label>
+						<input type="number" name="phonenumber" id="phone_number" placeholder="5*********" maxlength="10" class="required"/>
+                    </div>                                  
+                    <div data-role="fieldcontain">                                      
+                        <label for="usernamee">UserName:</label>
+						<input type="text" name="usernamee" id="username" placeholder="Name-Surname"/> 
+                    </div>
+                    <div data-role="fieldcontain">
+                    	<label for="Passwordd">Password:</label>
+						<input type="password" name="Passwordd" id="password" placeholder="Password"/>
+                    </div>
+                    <input type="button" data-theme="b" name="submit" id="submit" value="Save">
+                </fieldset>
+            </form>                              
+        	</div>
+				<p id="msgsave"></p>
+			</div>
+	</div>
+	<!-- /page -->
+	
+	<!-- Mapping page -->
+	<div data-role="page" id="basic-map" data-theme="d">
+			<div data-role="header" data-theme="b">
+				<div id="panel">
+					<select id="mode" onchange="typeRoute();">
+						<option value="DRIVING">Driving</option>
+						<option value="WALKING">Walking</option>
+					</select>
+				</div>
+            </div>
+            <div data-role="content" data-theme="d" style="width:100%; height:100%; padding:0;">
+            <input id="pac-input" class="controls" type="text"
+						placeholder="Enter a location to meet">
+                <div id="map_canvas" style="width:100%;height:100%"></div>
+            </div>
+            
+            <div data-role="footer" class="footer" data-position="fixed" data-theme="b">
+            
+            		<a href="#results" data-rel="popup" data-role="button" data-inline="true" data-transition="pop" style="width:100%;">See Direction</a>
+                	<div data-role="popup" id="results" style="max-height:150px;width:100%;overflow-y: auto;">
+                    	<div id="directions"></div>
+                	</div> 
+                	
+                	
+			</div>
+	</div><!-- /page -->
+
+	<!-- Contact List -->
+	<div data-role="page" id="contactList">
+			<div data-role="header">
+				<h1>Contact List</h1>
+			</div>
+			<div data-role="content">
+				<p id="pluginResult"></p>
+				<ul data-role="listview" id="contact_list"></ul>
+			</div>
+	</div>
+	<!-- /page -->
+	
+	<script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&libraries=places"></script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
+	<script src="cordova.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+	<script src="js/ModelOwnLocation.js"></script>
+    <script src="js/ModelGetLocation.js"></script>
+    <script src="js/ControllerPersonalInformation.js"></script>
+	<script src="js/ControllerUpdateLocation.js"></script>
+	<script src="js/ControllerGetLocation.js"></script>
+	<script src="js/ControllerContact.js"></script>
+    <script src="plugin.js"></script>
+	<script src="js/ControllerMain.js"></script>
+</body>
+</html>
